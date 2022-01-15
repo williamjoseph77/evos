@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"evos/be/handlers"
-	"evos/be/postgres"
+	"github.com/williamjoseph77/evos/handlers"
+	"github.com/williamjoseph77/evos/postgres"
 
 	"github.com/gorilla/mux"
 )

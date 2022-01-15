@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"evos/be/services"
 	"net/http"
+
+	"github.com/williamjoseph77/evos/services"
 )
 
 func (h *Handler) HandleGetRoleList(responseWriter http.ResponseWriter, request *http.Request) {

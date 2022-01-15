@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"encoding/json"
-	"evos/be/objects"
-	"evos/be/services"
-	"fmt"
 	"net/http"
+
+	"github.com/williamjoseph77/evos/objects"
+	"github.com/williamjoseph77/evos/services"
 )
 
 func (h *Handler) HandleCreateCharacterNonSecure(responseWriter http.ResponseWriter, request *http.Request) {
@@ -18,8 +18,7 @@ func (h *Handler) HandleCreateCharacterNonSecure(responseWriter http.ResponseWri
 		respondWithError(responseWriter, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	fmt.Println("request payload")
-	fmt.Println(requestPayload)
+
 	defer request.Body.Close()
 
 	character, err := services.CreateCharacterNonSecure(h.Database, requestPayload)
@@ -29,8 +28,7 @@ func (h *Handler) HandleCreateCharacterNonSecure(responseWriter http.ResponseWri
 	}
 
 	responsePayload.GUID = character.GUID
-	fmt.Println("responsenya harusnya")
-	fmt.Println(responsePayload)
+
 	respondWithJSON(responseWriter, http.StatusCreated, responsePayload)
 }
 

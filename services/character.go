@@ -1,9 +1,9 @@
 package services
 
 import (
-	"evos/be/db"
-	"evos/be/domains"
-	"evos/be/objects"
+	"github.com/williamjoseph77/evos/db"
+	"github.com/williamjoseph77/evos/domains"
+	"github.com/williamjoseph77/evos/objects"
 
 	"github.com/go-pg/pg/v10"
 )

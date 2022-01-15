@@ -1,8 +1,9 @@
 package db
 
 import (
-	"evos/be/domains"
 	"log"
+
+	"github.com/williamjoseph77/evos/domains"
 
 	"github.com/go-pg/pg/v10"
 	"github.com/google/uuid"
