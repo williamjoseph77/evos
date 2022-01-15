@@ -3,6 +3,7 @@ package postgres
 import (
 	"context"
 	"log"
+	"os"
 
 	"github.com/go-pg/pg/v10"
 )
@@ -30,9 +31,9 @@ func (d DBLogger) AfterQuery(ctx context.Context, evt *pg.QueryEvent) error {
 
 func Connect() *pg.DB {
 	return pg.Connect(&pg.Options{
-		Addr:     "localhost:5432",
-		User:     "postgres",
-		Password: "postgres",
-		Database: "evos",
+		Addr:     os.Getenv("DB_ADDRESS"),
+		User:     os.Getenv("DB_USER"),
+		Password: os.Getenv("DB_PASSWORD"),
+		Database: os.Getenv("DB_DATABASE"),
 	})
 }
