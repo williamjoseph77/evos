@@ -15,7 +15,11 @@ func CreateCharacter(dbi *pg.DB, character domains.Character) (*domains.Characte
 		return nil, err
 	}
 
-	tx.Model(&character).Insert()
+	_, err = tx.Model(&character).Insert()
+	if err != nil {
+		log.Println("error inserting new character ", err)
+		return nil, err
+	}
 
 	//nolint:errcheck
 	defer tx.Rollback()

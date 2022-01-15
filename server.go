@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/rs/cors"
 	"github.com/williamjoseph77/evos/handlers"
 	"github.com/williamjoseph77/evos/postgres"
 
@@ -42,6 +43,11 @@ func main() {
 
 	log.Println("Server listening on port ", port)
 
-	http.ListenAndServe(port, router)
-	log.Fatalln(http.ListenAndServe(port, router))
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowCredentials: true,
+	})
+
+	corsHandler := c.Handler(router)
+	log.Fatalln(http.ListenAndServe(port, corsHandler))
 }
