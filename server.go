@@ -44,7 +44,7 @@ func main() {
 	log.Println("Server listening on port ", port)
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
 	})
 
