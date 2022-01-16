@@ -9,18 +9,18 @@ import (
 )
 
 func (h *Handler) HandleGetRoleList(responseWriter http.ResponseWriter, request *http.Request) {
-	var response []objects.GetRoleListResponse
+	var responsePayload []objects.GetRoleListResponse
 	roles, err := services.GetRoleList(h.Database)
 	if err != nil {
 		respondWithError(responseWriter, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	err = copier.Copy(&response, &roles)
+	err = copier.Copy(&responsePayload, &roles)
 	if err != nil {
 		respondWithError(responseWriter, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	respondWithJSON(responseWriter, http.StatusCreated, response)
+	respondWithJSON(responseWriter, http.StatusCreated, responsePayload)
 }

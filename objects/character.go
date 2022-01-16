@@ -1,6 +1,8 @@
 package objects
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+)
 
 // CreateCharacterNonSecureRequest ...
 type CreateCharacterNonSecureRequest struct {
@@ -21,4 +23,13 @@ type CreateCharacterSecureRequest struct {
 // CreateCharacterResponse ...
 type CreateCharacterResponse struct {
 	GUID uuid.UUID `json:"guid"`
+}
+
+type GetCharacterListResponse struct {
+	GUID   uuid.UUID `json:"guid"`
+	Name   string    `json:"name"`
+	Power  int       `json:"power"`
+	Wealth float64   `json:"wealth"`
+
+	Role GetRoleListResponse `json:"role"`
 }

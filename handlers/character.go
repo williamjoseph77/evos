@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/jinzhu/copier"
 	"github.com/williamjoseph77/evos/objects"
 	"github.com/williamjoseph77/evos/services"
 )
@@ -56,11 +57,18 @@ func (h *Handler) HandleCreateCharacterSecure(responseWriter http.ResponseWriter
 }
 
 func (h *Handler) HandleGetCharacterList(responseWriter http.ResponseWriter, request *http.Request) {
+	var responsePayload []objects.GetCharacterListResponse
 	characters, err := services.GetCharacterList(h.Database)
 	if err != nil {
 		respondWithError(responseWriter, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	respondWithJSON(responseWriter, http.StatusCreated, characters)
+	err = copier.Copy(&responsePayload, &characters)
+	if err != nil {
+		respondWithError(responseWriter, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	respondWithJSON(responseWriter, http.StatusCreated, responsePayload)
 }
